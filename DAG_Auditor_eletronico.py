@@ -25,18 +25,9 @@ with DAG(dag_id=DAG_NAME,
          dagrun_timeout=timedelta(minutes=2),
          schedule_interval='30 0 * * *', catchup = False) as dag:
 
-      loop = CarteTransOperator(
+      VALIDA_INTERVALO_OS = CarteTransOperator(
         dag=dag,
-        task_id='loop',
-        trans='LOOP',
+        task_id='VALIDA_INTERVALO_OS',
+        trans='ETL_VALIDA_INTERVALO_OS',
         params={'date': '{{ ds }}'}
       )
-
-      copia = CarteTransOperator(
-        dag=dag,
-        task_id='copia',
-        trans='COPIA_ARQUIVO',
-        params={'date': '{{ ds }}'}
-      )
-
-      loop >> copia
