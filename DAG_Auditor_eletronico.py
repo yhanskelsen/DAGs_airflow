@@ -8,7 +8,7 @@ from airflow_pentaho.operators.kettle import PanOperator
 from airflow_pentaho.operators.carte import CarteJobOperator
 from airflow_pentaho.operators.carte import CarteTransOperator
 
-DAG_NAME = 'pdi_flow2'
+DAG_NAME = 'DAG_Auditor_eletronico'
 DEFAULT_ARGS = {
     'owner': 'Airflow',
     'depends_on_past': False,
