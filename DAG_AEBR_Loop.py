@@ -22,7 +22,7 @@ DEFAULT_ARGS = {
 
 with DAG(dag_id=DAG_NAME,
          default_args=DEFAULT_ARGS,
-         dagrun_timeout=timedelta(minutes=2),
+         #dagrun_timeout=timedelta(minutes=2),
          schedule_interval='30 0 * * *', catchup = False) as dag:
 
       ETL_VALIDA_INTERVALO_OS = CarteTransOperator(
