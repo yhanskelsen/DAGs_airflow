@@ -31,3 +31,13 @@ with DAG(dag_id=DAG_NAME,
         trans='ETL_VALIDA_INTERVALO_OS',
         params={'date': '{{ ds }}'}
       )
+
+      CADASTRO_DECA_RESUMIDA = CarteTransOperator(
+        dag=dag,
+        task_id='CADASTRO_DECA_RESUMIDA',
+        trans='ETL_CADASTRO_DECA_RESUMIDA',
+        params={'date': '{{ ds }}'}
+      )
+
+    VALIDA_INTERVALO_OS >> CADASTRO_DECA_RESUMIDA
+  
