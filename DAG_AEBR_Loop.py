@@ -25,26 +25,35 @@ with DAG(dag_id=DAG_NAME,
          dagrun_timeout=timedelta(minutes=2),
          schedule_interval='30 0 * * *', catchup = False) as dag:
 
-      loop = CarteTransOperator(
+      ETL_VALIDA_INTERVALO_OS = CarteTransOperator(
         dag=dag,
-        task_id='loop',
-        trans='LOOP',
+        task_id='ETL_VALIDA_INTERVALO_OS',
+        trans='ETL_VALIDA_INTERVALO_OS',
         params={'date': '{{ ds }}'}
       )
 
-      copia = CarteTransOperator(
+      ETL_CADASTRO_DECA_RESUMIDA = CarteTransOperator(
         dag=dag,
-        task_id='copia',
-        trans='COPIA_ARQUIVO',
+        task_id='ETL_CADASTRO_DECA_RESUMIDA',
+        trans='ETL_CADASTRO_DECA_RESUMIDA',
         params={'date': '{{ ds }}'}
       )
 
-      teste = CarteTransOperator(
+      ETL_CADASTRO_SOCIOS = CarteTransOperator(
         dag=dag,
-        task_id='teste',
-        trans='LOOP',
+        task_id='ETL_CADASTRO_SOCIOS',
+        trans='ETL_CADASTRO_SOCIOS',
         params={'date': '{{ ds }}'}
       )
 
-      loop >> copia
-      loop >> teste
+      ETL_CADASTRO_CODOCOR = CarteTransOperator(
+        dag=dag,
+        task_id='ETL_CADASTRO_CODOCOR',
+        trans='ETL_CADASTRO_CODOCOR',
+        params={'date': '{{ ds }}'}
+      )
+    
+      ETL_VALIDA_INTERVALO_OS >> ETL_CADASTRO_DECA_RESUMIDA
+      ETL_VALIDA_INTERVALO_OS >> ETL_CADASTRO_SOCIOS
+      ETL_VALIDA_INTERVALO_OS >> ETL_CADASTRO_CODOCOR
+        
