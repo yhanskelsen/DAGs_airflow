@@ -28,28 +28,28 @@ with DAG(dag_id=DAG_NAME,
       ETL_VALIDA_INTERVALO_OS = CarteTransOperator(
         dag=dag,
         task_id='ETL_VALIDA_INTERVALO_OS',
-        trans='ETL_VALIDA_INTERVALO_OS',
+        trans='ETL_AUDITOR_ELETRONICO\ETL_VALIDA_INTERVALO_OS',
         params={'date': '{{ ds }}'}
       )
 
       ETL_CADASTRO_DECA_RESUMIDA = CarteTransOperator(
         dag=dag,
         task_id='ETL_CADASTRO_DECA_RESUMIDA',
-        trans='ETL_CADASTRO_DECA_RESUMIDA',
+        trans='ETL_AUDITOR_ELETRONICO\ETL_CADASTRO_DECA_RESUMIDA',
         params={'date': '{{ ds }}'}
       )
 
       ETL_CADASTRO_SOCIOS = CarteTransOperator(
         dag=dag,
         task_id='ETL_CADASTRO_SOCIOS',
-        trans='ETL_CADASTRO_SOCIOS',
+        trans='ETL_AUDITOR_ELETRONICO\ETL_CADASTRO_SOCIOS',
         params={'date': '{{ ds }}'}
       )
 
       ETL_CADASTRO_CODOCOR = CarteTransOperator(
         dag=dag,
         task_id='ETL_CADASTRO_CODOCOR',
-        trans='ETL_CADASTRO_CODOCOR',
+        trans='ETL_AUDITOR_ELETRONICO\ETL_CADASTRO_CODOCOR',
         params={'date': '{{ ds }}'}
       )
     
