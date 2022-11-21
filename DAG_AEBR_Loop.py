@@ -116,11 +116,11 @@ with DAG(dag_id=DAG_NAME,
         params={'date': '{{ ds }}'}
       )
 
-      #JOB_LIMPA_ARQUIVOS = CarteJobOperator(
-       # dag=dag,
-        #task_id="JOB_LIMPA_ARQUIVOS",
-        #job="/ETL_AUDITOR_ELETRONICO/JOB_LIMPA_ARQUIVOS",
-        #params={"date": "{{ ds }}"})
+      JOB_LIMPA_ARQUIVOS = CarteJobOperator(
+        dag=dag,
+        task_id="JOB_LIMPA_ARQUIVOS",
+        job="/ETL_AUDITOR_ELETRONICO/JOB_LIMPA_ARQUIVOS",
+        params={"date": "{{ ds }}"})
 
       ETL_GERACAO_ARQUIVOS_LOOP = CarteTransOperator(
         dag=dag,
@@ -135,11 +135,11 @@ with DAG(dag_id=DAG_NAME,
         job="/ETL_AUDITOR_ELETRONICO/JOB_CRIACAO_ARQUIVOS",
         params={"date": "{{ ds }}"})
 
-      #JOB_VERIFICA_MONTAGEM = CarteJobOperator(
-       # dag=dag,
-        #task_id="JOB_VERIFICA_MONTAGEM",
-        #job="/ETL_AUDITOR_ELETRONICO/JOB_VERIFICA_MONTAGEM",
-        #params={"date": "{{ ds }}"})
+      JOB_VERIFICA_MONTAGEM = CarteJobOperator(
+        dag=dag,
+        task_id="JOB_VERIFICA_MONTAGEM",
+        job="/ETL_AUDITOR_ELETRONICO/JOB_VERIFICA_MONTAGEM",
+        params={"date": "{{ ds }}"})
 
       ETL_COPIAR_ARQUIVOS_LOOP = CarteTransOperator(
         dag=dag,
@@ -148,11 +148,11 @@ with DAG(dag_id=DAG_NAME,
         params={'date': '{{ ds }}'}
       )
 
-      #JOB_MOVER_ARQUIVOS_PASTA_USUARIO = CarteJobOperator(
-       # dag=dag,
-        #task_id="JOB_MOVER_ARQUIVOS_PASTA_USUARIO",
-        #job="/ETL_AUDITOR_ELETRONICO/JOB_MOVER_ARQUIVOS_PASTA_USUARIO",
-        #params={"date": "{{ ds }}"})
+      JOB_MOVER_ARQUIVOS_PASTA_USUARIO = CarteJobOperator(
+        dag=dag,
+        task_id="JOB_MOVER_ARQUIVOS_PASTA_USUARIO",
+        job="/ETL_AUDITOR_ELETRONICO/JOB_MOVER_ARQUIVOS_PASTA_USUARIO",
+        params={"date": "{{ ds }}"})
 
       JOB_ENVIAR_EMAIL_FINAL = CarteJobOperator(
         dag=dag,
@@ -160,11 +160,11 @@ with DAG(dag_id=DAG_NAME,
         job="/ETL_AUDITOR_ELETRONICO/JOB_ENVIAR_EMAIL_FINAL",
         params={"date": "{{ ds }}"})
 
-      #JOB_FINALIZA_CARGA = CarteJobOperator(
-       # dag=dag,
-        #task_id="JOB_FINALIZA_CARGA",
-        #job="/ETL_AUDITOR_ELETRONICO/JOB_FINALIZA_CARGA",
-        #params={"date": "{{ ds }}"})
+      JOB_FINALIZA_CARGA = CarteJobOperator(
+        dag=dag,
+        task_id="JOB_FINALIZA_CARGA",
+        job="/ETL_AUDITOR_ELETRONICO/JOB_FINALIZA_CARGA",
+        params={"date": "{{ ds }}"})
       
       ETL_VALIDA_INTERVALO_OS >> ETL_CADASTRO_DECA_RESUMIDA
       ETL_VALIDA_INTERVALO_OS >> ETL_CADASTRO_SOCIOS
@@ -178,7 +178,4 @@ with DAG(dag_id=DAG_NAME,
       ETL_CADASTRO_DADOS_DAES >> ETL_CADASTRO_DADOS_GIAST
       ETL_CADASTRO_DADOS_GIAST >> ETL_CADASTRO_DADOS_DAPIRES
       ETL_CADASTRO_DADOS_DAPIRES >> ETL_LIMPA_ATRIBUTOS_TAGS
-      #ETL_VALIDA_INTERVALO_OS >> JOB_LIMPA_ARQUIVOS
-      ETL_VALIDA_INTERVALO_OS >> ETL_GERACAO_ARQUIVOS_LOOP >> JOB_CRIACAO_ARQUIVOS #>> JOB_VERIFICA_MONTAGEM
-      JOB_CRIACAO_ARQUIVOS >> ETL_COPIAR_ARQUIVOS_LOOP #>> JOB_MOVER_ARQUIVOS_PASTA_USUARIO
-      ETL_COPIAR_ARQUIVOS_LOOP >> JOB_ENVIAR_EMAIL_FINAL #>> JOB_FINALIZA_CARGA      
+      ETL_VALIDA_INTERVALO_OS >> JOB_LIMPA_ARQUIVOS >> ETL_GERACAO_ARQUIVOS_LOOP >> JOB_CRIACAO_ARQUIVOS >> JOB_VERIFICA_MONTAGEM >> ETL_COPIAR_ARQUIVOS_LOOP >> JOB_MOVER_ARQUIVOS_PASTA_USUARIO >> JOB_ENVIAR_EMAIL_FINAL >> JOB_FINALIZA_CARGA      
