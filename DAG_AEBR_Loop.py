@@ -160,11 +160,11 @@ with DAG(dag_id=DAG_NAME,
         job="/ETL_AUDITOR_ELETRONICO/JOB_ENVIAR_EMAIL_FINAL",
         params={"date": "{{ ds }}"})
 
-      JOB_FINALIZA_CARGA = CarteJobOperator(
-        dag=dag,
-        task_id="JOB_FINALIZA_CARGA",
-        job="/ETL_AUDITOR_ELETRONICO/JOB_FINALIZA_CARGA",
-        params={"date": "{{ ds }}"})
+      #JOB_FINALIZA_CARGA = CarteJobOperator(
+       # dag=dag,
+        #task_id="JOB_FINALIZA_CARGA",
+        #job="/ETL_AUDITOR_ELETRONICO/JOB_FINALIZA_CARGA",
+        #params={"date": "{{ ds }}"})
       
       ETL_VALIDA_INTERVALO_OS >> ETL_CADASTRO_DECA_RESUMIDA
       ETL_VALIDA_INTERVALO_OS >> ETL_CADASTRO_SOCIOS
@@ -185,4 +185,4 @@ with DAG(dag_id=DAG_NAME,
       JOB_VERIFICA_MONTAGEM >> ETL_COPIAR_ARQUIVOS_LOOP
       ETL_COPIAR_ARQUIVOS_LOOP >> JOB_MOVER_ARQUIVOS_PASTA_USUARIO
       JOB_MOVER_ARQUIVOS_PASTA_USUARIO >> JOB_ENVIAR_EMAIL_FINAL
-      JOB_ENVIAR_EMAIL_FINAL >> JOB_FINALIZA_CARGA      
+      #JOB_ENVIAR_EMAIL_FINAL >> JOB_FINALIZA_CARGA      
